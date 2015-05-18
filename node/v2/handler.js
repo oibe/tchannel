@@ -182,6 +182,14 @@ TChannelV2Handler.prototype.handleCallRequest = function handleCallRequest(reqFr
     if (self.remoteHostPort === null) {
         return callback(errors.CallReqBeforeInitReqError());
     }
+
+    if (!reqFrame.body ||
+        !reqFrame.body.headers ||
+        !reqFrame.body.headers.as
+    ) {
+        return callback(errors.AsHeaderRequired());
+    }
+
     var req = self.buildInRequest(reqFrame);
     if (reqFrame.body.args && reqFrame.body.args[0] &&
         reqFrame.body.args[0].length > v2.CallRequest.MaxArg1Size) {
