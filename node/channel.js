@@ -111,6 +111,8 @@ function TChannel(options) {
     self.requestDefaults = extend({
         timeout: TChannelRequest.defaultTimeout
     }, self.options.requestDefaults);
+    self.transportHeaderDefaults =
+        self.options.transportHeaderDefaults;
 
     self.logger = self.options.logger || nullLogger;
     self.random = self.options.random || globalRandom;
@@ -391,9 +393,24 @@ TChannel.prototype.requestOptions = function requestOptions(options) {
     for (prop in self.requestDefaults) {
         opts[prop] = self.requestDefaults[prop];
     }
+    if (self.transportHeaderDefaults) {
+        opts.headers = {};
+        for (prop in self.transportHeaderDefaults) {
+            opts.headers[prop] = self.transportHeaderDefaults[prop];
+        }
+    }
     if (options) {
         for (prop in options) {
+            if (prop === 'headers') {
+                continue;
+            }
             opts[prop] = options[prop];
+        }
+    }
+    if (options && options.headers) {
+        opts.headers = opts.headers || {};
+        for (prop in options.headers) {
+            opts.headers[prop] = options.headers[prop];
         }
     }
     // jshint forin:true
