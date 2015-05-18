@@ -22,6 +22,7 @@
 
 var EventEmitter = require('../lib/event_emitter');
 var util = require('util');
+var assert = require('assert');
 
 var OutRequest = require('./out_request').OutRequest;
 var OutResponse = require('./out_response').OutResponse;
@@ -379,6 +380,10 @@ TChannelV2Handler.prototype.sendCallRequestFrame = function sendCallRequestFrame
     var reqBody = new v2.CallRequest(
         flags, req.ttl, req.tracing, req.serviceName, req.headers,
         req.checksum.type, args);
+
+    assert(req.headers && req.headers.as,
+        'Expected the "as" transport header to be set');
+
     req.checksum = self._sendCallBodies(req.id, reqBody, null);
 };
 
