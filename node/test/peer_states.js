@@ -30,6 +30,9 @@ allocCluster.test('healthy state stays healthy', {
     channelOptions: {
         timers: MockTimers(Date.now()),
         random: winning
+    },
+    transportHeaderDefaults: {
+        as: 'raw'
     }
 }, function t(cluster, assert) {
     var one = cluster.channels[0];
@@ -240,7 +243,10 @@ function testSetup(desc, testFunc) {
             return function runSendTest(callback) {
                 client.request({
                     serviceName: 'tiberius', 
-                    hasNoParent: true
+                    hasNoParent: true,
+                    headers: {
+                        as: 'raw'
+                    }
                 }).send(op, '', '', onResult);
                 function onResult(err, res, arg2, arg3) {
                     callback(null, {

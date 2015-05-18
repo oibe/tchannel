@@ -29,6 +29,9 @@ allocCluster.test('register() with different results', {
     channelOptions: {
         requestDefaults: {
             timeout: 100
+        },
+        transportHeaderDefaults: {
+            as: 'raw'
         }
     }
 }, function t(cluster, assert) {

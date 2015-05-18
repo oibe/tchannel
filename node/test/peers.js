@@ -32,7 +32,10 @@ allocCluster.test('add a peer and request', {
 
     setupEcho(steve, 'steve');
     bob = bob.makeSubChannel({
-        serviceName: 'steve'
+        serviceName: 'steve',
+        transportHeaderDefaults: {
+            as: 'raw'
+        }
     });
 
     bob.request({
@@ -70,7 +73,10 @@ allocCluster.test('adding a peer twice', {
 
     setupEcho(steve, 'steve');
     bob = bob.makeSubChannel({
-        serviceName: 'steve'
+        serviceName: 'steve',
+        transportHeaderDefaults: {
+            as: 'raw'
+        }
     });
 
     bob.peers.add(steve.hostPort);
@@ -99,7 +105,10 @@ allocCluster.test('removing a peer and request', {
 
     setupEcho(steve, 'steve');
     bob = bob.makeSubChannel({
-        serviceName: 'steve'
+        serviceName: 'steve',
+        transportHeaderDefaults: {
+            as: 'raw'
+        }
     });
 
     bob.peers.add(steve.hostPort);
@@ -138,7 +147,10 @@ allocCluster.test('clearing peers and requests', {
     setupEcho(steve1, 'steve');
     setupEcho(steve2, 'steve');
     bob = bob.makeSubChannel({
-        serviceName: 'steve'
+        serviceName: 'steve',
+        transportHeaderDefaults: {
+            as: 'raw'
+        }
     });
 
     bob.peers.add(steve1.hostPort);
@@ -177,10 +189,16 @@ allocCluster.test('delete peer() on top channel', {
     setupEcho(steve, 'steve1');
     setupEcho(steve, 'steve2');
     var bob1 = bob.makeSubChannel({
-        serviceName: 'steve1'
+        serviceName: 'steve1',
+        transportHeaderDefaults: {
+            as: 'raw'
+        }
     });
     var bob2 = bob.makeSubChannel({
-        serviceName: 'steve2'
+        serviceName: 'steve2',
+        transportHeaderDefaults: {
+            as: 'raw'
+        }
     });
 
     bob1.peers.add(steve.hostPort);
@@ -249,10 +267,16 @@ allocCluster.test('peers.clear() on top channel', {
     setupEcho(steve, 'steve1');
     setupEcho(steve, 'steve2');
     var bob1 = bob.makeSubChannel({
-        serviceName: 'steve1'
+        serviceName: 'steve1',
+        transportHeaderDefaults: {
+            as: 'raw'
+        }
     });
     var bob2 = bob.makeSubChannel({
-        serviceName: 'steve2'
+        serviceName: 'steve2',
+        transportHeaderDefaults: {
+            as: 'raw'
+        }
     });
 
     bob1.peers.add(steve.hostPort);

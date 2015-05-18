@@ -102,6 +102,8 @@ function partsTest(testCase, assert) {
 
         var peer = testCase.channel.peers.choosePeer(null, options);
         var conn = peer.connect();
+        options.headers = options.headers || {};
+        options.headers.as = 'raw';
         var req = conn.request(options);
         conn.on('identified', function onId() {
             var resultReady = Ready();

@@ -333,7 +333,10 @@ allocCluster.test('self send() with error frame', 1, function t(cluster, assert)
 
     subOne.request({
         host: one.hostPort,
-        hasNoParent: true
+        hasNoParent: true,
+        headers: {
+            'as': 'raw'
+        }
     }).send('foo', '', '', onResponse);
 
     function onResponse(err) {
@@ -366,6 +369,9 @@ function sendTest(testCase, assert) {
     return function runSendTest(callback) {
         testCase.opts = testCase.opts || {};
         testCase.opts.hasNoParent = true;
+        testCase.opts.headers = {
+            'as': 'raw'
+        };
 
         testCase.channel
             .request(testCase.opts)
