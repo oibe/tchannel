@@ -22,6 +22,7 @@
 
 var assert = require('assert');
 var RelayHandler = require('../relay_handler');
+var ServiceHealthProxy = require('./service_health_proxy');
 
 var REGISTER_GRACE_PERIOD = 1000;
 var REGISTER_TTL = 1000;
@@ -172,7 +173,17 @@ function createServiceChannel(serviceName) {
         }
     }
 
-    svcchan.handler = new RelayHandler(svcchan);
+    var handler = new RelayHandler(svcchan);
+
+    // Decorate a circuit health monitor to egress request handlers.
+    if (mode === 'exit' && self.circuits) {
+        handler = new ServiceHealthProxy({
+            nextHandler: handler,
+            circuits: self.circuits
+        });
+    }
+
+    svcchan.handler = handler;
 
     return svcchan;
 };
@@ -187,6 +198,10 @@ function updateServiceChannels() {
         if (chan.serviceProxyMode) {
             self.updateServiceChannel(chan);
         }
+    }
+
+    if (self.circuits) {
+        self.circuits.updateServices(serviceNames);
     }
 };
 
