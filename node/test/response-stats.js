@@ -47,8 +47,10 @@ allocCluster.test('emits response stats with ok', {
     var clientChan = client.makeSubChannel({
         serviceName: 'server',
         peers: [server.hostPort],
-        transportHeaderDefaults: {
-            as: 'raw'
+        requestDefaults: {
+            headers: {
+                as: 'raw'
+            }
         }
     });
 
@@ -127,8 +129,10 @@ allocCluster.test('emits response stats with not ok', {
     var clientChan = client.makeSubChannel({
         serviceName: 'server',
         peers: [server.hostPort],
-        transportHeaderDefaults: {
-            as: 'raw'
+        requestDefaults: {
+            headers: {
+                as: 'raw'
+            }
         }
     });
 
@@ -208,8 +212,10 @@ allocCluster.test('emits response stats with error', {
     var clientChan = client.makeSubChannel({
         serviceName: 'server',
         peers: [server.hostPort],
-        transportHeaderDefaults: {
-            as: 'raw'
+        requestDefaults: {
+            headers: {
+                as: 'raw'
+            }
         }
     });
 

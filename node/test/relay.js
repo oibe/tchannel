@@ -48,10 +48,10 @@ allocCluster.test('send relay requests', {
         serviceName: 'two',
         peers: [one.hostPort],
         requestDefaults: {
-            serviceName: 'two'
-        },
-        transportHeaderDefaults: {
-            as: 'raw'
+            serviceName: 'two',
+            headers: {
+                as: 'raw'
+            }
         }
     });
 
@@ -88,8 +88,10 @@ allocCluster.test('relay respects ttl', {
     var sourceChan = source.makeSubChannel({
         serviceName: 'dest',
         peers: [relay.hostPort],
-        transportHeaderDefaults: {
-            as: 'raw'
+        requestDefaults: {
+            headers: {
+                as: 'raw'
+            }
         }
     });
 
@@ -146,10 +148,10 @@ allocCluster.test('relay an error frame', {
         serviceName: 'two',
         peers: [one.hostPort, four.hostPort],
         requestDefaults: {
-            serviceName: 'two'
-        },
-        transportHeaderDefaults: {
-            as: 'raw'
+            serviceName: 'two',
+            headers: {
+                as: 'raw'
+            }
         }
     });
 

@@ -67,10 +67,10 @@ allocCluster.test('request retries', {
         serviceName: 'tristan',
         peers: cluster.hosts,
         requestDefaults: {
+            headers: {
+                as: 'raw'
+            },
             serviceName: 'tristan'
-        },
-        transportHeaderDefaults: {
-            as: 'raw'
         }
     });
 
@@ -176,10 +176,10 @@ allocCluster.test('request application retries', {
         serviceName: 'tristan',
         peers: cluster.hosts,
         requestDefaults: {
-            serviceName: 'tristan'
-        },
-        transportHeaderDefaults: {
-            as: 'raw'
+            serviceName: 'tristan',
+            headers: {
+                as: 'raw'
+            }
         }
     });
 
@@ -299,10 +299,10 @@ allocCluster.test('retryFlags work', {
         serviceName: 'tristan',
         peers: cluster.hosts,
         requestDefaults: {
-            serviceName: 'tristan'
-        },
-        transportHeaderDefaults: {
-            as: 'raw'
+            serviceName: 'tristan',
+            headers: {
+                as: 'raw'
+            }
         }
     });
 

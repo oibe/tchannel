@@ -44,8 +44,10 @@ allocCluster.test('emits stats', {
     var clientChan = client.makeSubChannel({
         serviceName: 'server',
         peers: [server.hostPort],
-        transportHeaderDefaults: {
-            as: 'raw'
+        requestDefaults: {
+            headers: {
+                as: 'raw'
+            }
         }
     });
 

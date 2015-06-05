@@ -27,8 +27,10 @@ allocCluster.test('does not leak inOps', {
     channelOptions: {
         timeoutCheckInterval: 100,
         serverTimeoutDefault: 100,
-        transportHeaderDefaults: {
-            as: 'raw'
+        requestDefaults: {
+            headers: {
+                as: 'raw'
+            }
         }
     }
 }, function t(cluster, assert) {

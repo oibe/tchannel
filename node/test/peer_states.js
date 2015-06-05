@@ -31,8 +31,10 @@ allocCluster.test('healthy state stays healthy', {
         timers: MockTimers(Date.now()),
         random: winning
     },
-    transportHeaderDefaults: {
-        as: 'raw'
+    requestDefaults: {
+        headers: {
+            as: 'raw'
+        }
     }
 }, function t(cluster, assert) {
     var one = cluster.channels[0];

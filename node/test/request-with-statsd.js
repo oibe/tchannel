@@ -57,8 +57,10 @@ allocCluster.test('emits stats on call success', {
     var clientChan = client.makeSubChannel({
         serviceName: 'reservoir',
         peers: [server.hostPort],
-        transportHeaderDefaults: {
-            as: 'raw'
+        requestDefaults: {
+            headers: {
+                as: 'raw'
+            }
         }
     });
 
@@ -134,8 +136,10 @@ allocCluster.test('emits stats on call failure', {
     var clientChan = client.makeSubChannel({
         serviceName: 'reservoir',
         peers: [server.hostPort],
-        transportHeaderDefaults: {
-            as: 'raw'
+        requestDefaults: {
+            headers: {
+                as: 'raw'
+            }
         }
     });
 

@@ -28,10 +28,10 @@ allocCluster.test('register() with different results', {
     numPeers: 2,
     channelOptions: {
         requestDefaults: {
-            timeout: 100
-        },
-        transportHeaderDefaults: {
-            as: 'raw'
+            timeout: 100,
+            headers: {
+                as: 'raw'
+            }
         }
     }
 }, function t(cluster, assert) {
