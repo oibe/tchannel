@@ -183,14 +183,19 @@ TChannelV2Handler.prototype.handleCallRequest = function handleCallRequest(reqFr
         return callback(errors.CallReqBeforeInitReqError());
     }
 
+    var req = self.buildInRequest(reqFrame);
+
     if (!reqFrame.body ||
         !reqFrame.body.headers ||
         !reqFrame.body.headers.as
     ) {
-        return callback(errors.AsHeaderRequired());
+        var err = errors.AsHeaderRequired();
+        self.sendErrorFrame(
+            req.res, 'ProtocolError', err.message
+        );
+        return callback();
     }
 
-    var req = self.buildInRequest(reqFrame);
     if (reqFrame.body.args && reqFrame.body.args[0] &&
         reqFrame.body.args[0].length > v2.CallRequest.MaxArg1Size) {
         req.res = self.buildOutResponse(req);
