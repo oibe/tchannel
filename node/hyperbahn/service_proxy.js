@@ -32,13 +32,13 @@ function ServiceDispatchHandler(options) {
     }
     var self = this;
 
-    self.options = options;
     assert(options, 'service dispatch handler options not actually optional');
-    self.channel = self.options.channel;
-    self.config = self.options.config;
-    self.logger = self.options.logger;
-    self.statsd = self.options.statsd;
-    self.egressNodes = self.options.egressNodes;
+    self.channel = options.channel;
+    self.config = options.config;
+    self.logger = options.logger;
+    self.statsd = options.statsd;
+    self.egressNodes = options.egressNodes;
+    self.circuits = options.circuits;
 
     self.egressNodes.on('membershipChanged', onMembershipChanged);
 
